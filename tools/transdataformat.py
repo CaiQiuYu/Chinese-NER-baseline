@@ -16,7 +16,7 @@ map_dict = {"试验要素": ["B-TEST", "I-TEST"],
 #  prepare train data
 base_path = "../data/train"
 file_list = sorted(os.listdir(base_path))
-print(file_list[-1])
+print(file_list[31])
 result = []
 for fi in tqdm(file_list):
     pa = os.path.join(base_path, fi)
@@ -30,6 +30,7 @@ for fi in tqdm(file_list):
         for i in range(ele["start_pos"], ele["end_pos"]):
             tag_ele[i] = label_name[1]
     result.append((text_ele, tag_ele))
+print(len(result))
 
 with open("../data/msra_train_bio", "w", encoding="utf-8") as fw:
     for re in result:

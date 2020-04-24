@@ -16,7 +16,7 @@ map_dict = {"试验要素": ["B-TEST", "I-TEST"],
 #  prepare train data
 base_path = "../data/train"
 file_list = sorted(os.listdir(base_path))
-print(file_list[31])
+print(file_list[199])
 result = []
 for fi in tqdm(file_list):
     pa = os.path.join(base_path, fi)
@@ -32,30 +32,34 @@ for fi in tqdm(file_list):
     result.append((text_ele, tag_ele))
 print(len(result))
 
+len_be = []
 with open("../data/msra_train_bio", "w", encoding="utf-8") as fw:
     for re in result:
+        ind = 0
         for word, tag in zip(re[0], re[1]):
             if word == " ":
-                print("NUll acc")
                 continue
             fw.write(word + "\t" + tag)
             fw.write("\n")
+            ind += 1
+        len_be.append(ind)
         fw.write("\n")
-
+print(len_be)
 
 # load test data
 result = []
+len_test = []
 test_data = json.load(open("../data/validate_data.json", encoding="utf-8"))
 for k, v in test_data.items():
-    text = list(v.strip())
+    text = list(v.strip().replace(" ", ""))
     tag = ["O" for i in range(len(text))]
     result.append((text, tag))
+    len_test.append(len(text))
 
 with open("../data/msra_test_bio", "w", encoding="utf-8") as fw:
     for re in result:
         for word, tag in zip(re[0], re[1]):
             if word == " ":
-                print("NUll acc")
                 continue
             fw.write(word + "\t" + tag)
             fw.write("\n")

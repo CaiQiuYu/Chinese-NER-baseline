@@ -34,7 +34,7 @@ for fi in tqdm(file_list):
 with open("../data/msra_train_bio", "w", encoding="utf-8") as fw:
     for re in result:
         for word, tag in zip(re[0], re[1]):
-            fw.write(word + " " + tag)
+            fw.write(word + "\t" + tag)
             fw.write("\n")
         fw.write("\n")
 
@@ -50,6 +50,6 @@ for k, v in test_data.items():
 with open("../data/msra_test_bio", "w", encoding="utf-8") as fw:
     for re in result:
         for word, tag in zip(re[0], re[1]):
-            fw.write(word + " " + tag)
+            fw.write(word + "\t" + tag)
             fw.write("\n")
         fw.write("\n")
